@@ -19,7 +19,7 @@ import {
   updateNfts,
   getUser,
   saveUser,
-  updatePoints,
+
 } from "../utils/firebaseFunctions";
 // import { Connection } from "@metaplex/js";
 import * as web3 from "@solana/web3.js";
@@ -379,7 +379,7 @@ const Profile = () => {
         </button>
         <button
        onClick={() => sendSol(count2)} 
-         /*  onClick={updatePoints} */
+        /*   onClick={updatePoints} */
           className="bg-yellow-300 text-tesmo font-semibold hover:bg-tesmo2 border-2 border-yellow-300 hover:border-tesmo2 hover:text-white w-full rounded-lg text-center p-2 cursor-pointer"
         >
           Buy with Sol
@@ -388,11 +388,41 @@ const Profile = () => {
     );
   };
 
+  const updatePoints = async () => {
+    try {
+      const response = await fetch(`${nodeurl}/updatepoints`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: usermongo._id,
+          newValue: usermongo.points + count2, // Update the points value as needed
+        }),
+      });
+
+     
+
+      const res = await response.json();
+      if(res) {
+        alert("points update");
+        setUserMongo(prevUser => ({
+          ...prevUser, // Copy the existing user properties
+          points: prevUser.points + count2, // Update only the age property
+        }));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const connection = new web3.Connection(
     "https://rpc.hellomoon.io/b5ad5dfe-e109-4b7d-945e-b20ba8f7925f",
     "confirmed"
   );
 
+  
+  
   const sendSol = (count2) => {
     if (!connection || !publicKey) {
       return;

@@ -47,6 +47,8 @@ const Staked = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const { publicKey } = useWallet();
+ /*  const  publicKey = useWallet(); */
+
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts =
@@ -83,7 +85,8 @@ const Staked = () => {
       },
       body: JSON.stringify({
                 ownerAccount: publicKey && publicKey.toBase58(),
-/*          ownerAccount: "cHe9jhHZq6A4FVoAZnucyUM33QP9uTHTEQ64WyVqE3n",
+/*                 ownerAccount:'2BZCXepjSBDgn6MmcvmufDT4jyCCLShBaTuzZqtyrTgV',
+ *//*          ownerAccount: "cHe9jhHZq6A4FVoAZnucyUM33QP9uTHTEQ64WyVqE3n",
  */      }),
     };
 
@@ -91,7 +94,6 @@ const Staked = () => {
       const request = await fetch(b)
         .then((response) => response.json())
         .then((res) => {
-          console.log(res);
           setNfts((prev) => [
             ...prev,
             { imageUrl: res.image, name: res.name, tokenAddress: tokenAddress },
@@ -108,8 +110,6 @@ const Staked = () => {
     )
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
-
         res.data.map((a) => {
           /* setNfts((prev) => [...prev, a])
         setNfts2((prev) => [...prev, a]) */
@@ -210,6 +210,8 @@ const Staked = () => {
     first();
     const asd = async () => {
       const test2 = await checkuser(publicKey && publicKey.toBase58());
+/*       const test2 = await checkuser('2BZCXepjSBDgn6MmcvmufDT4jyCCLShBaTuzZqtyrTgV');
+ */
       setUser(test2);
       setStake(test2.staked);
       setNfts([]);
@@ -237,7 +239,7 @@ const Staked = () => {
     }, 1000);
 
     publicKey ? asd() : setLoading(false);
-  }, [publicKey, claimed]);
+  }, [publicKey]);
 
   const updatestake = (a) => {
     let result = [];
@@ -263,12 +265,8 @@ const Staked = () => {
 
     const result = diferenciaEnHoras * (points / 24);
 
-    console.log("puntos", puntoss);
-
     puntoss = puntoss + result;
 
-    console.log("puntos", puntoss);
-    console.log("userpoints", user.points);
   };
 
   const pointsearn3 = (a, points) => {
@@ -282,10 +280,7 @@ const Staked = () => {
     const diferenciaEnHoras = diferenciaEnMilisegundos / (1000 * 60 * 60);
 
     const result = diferenciaEnHoras * (points / 24);
-    /* const result = diferenciaEnHoras * (points / 1000); */
-    /*  console.log(points) */
-    /*     puntoss = puntoss + result;
-     */
+  
 
     thes2 = thes2 + Math.floor(result);
   };
@@ -329,6 +324,13 @@ const Staked = () => {
       updateNfts(dataa);
       setStake([]);
     } else if (a === "claimall") {
+      
+      const datapoints = {
+        id: publicKey && publicKey.toBase58(),
+        points: Math.floor(parseInt(user.points)) + thes2,
+      };
+   /*    updatePoints(datapoints) */
+   
       let result = [];
       updatestake(stake).map((a) => pointsearn(a.snapshot, a.points));
       setClaimed(true);
@@ -342,10 +344,8 @@ const Staked = () => {
       const tostake2 = result.map((a) => ({
         ...a,
         snapshot: `${Date.now()}`,
-        /*  snapshot: a.snapshot, */
         points: a.name && a.name.includes("Sapphire") || a.name.includes("Ruby") ? 3 * qtyxhr : qtyxhr,
-        /*         blocknumber: a.provenance[0].blockNumber,
-         */
+       
       }));
 
       const data2 = {
@@ -354,12 +354,10 @@ const Staked = () => {
         snapshot: `${Date.now()}`,
       };
 
-      const datapoints = {
-        id: publicKey && publicKey.toBase58(),
-        points: Math.floor(parseInt(user.points)) + puntoss,
-      };
+    
       updateNfts(data2);
       updatePoints(datapoints);
+    
     } else {
       setUpdate(!update);
       setNfts(nfts.filter((el) => !select.includes(el)));
@@ -367,7 +365,6 @@ const Staked = () => {
         ...a,
         snapshot: `${Date.now()}`,
         points: a.name && a.name.includes("Sapphire") || a.name.includes("Ruby") ? 3 * qtyxhr : qtyxhr,
-        /*  blocknumber: a.provenance[0].blockNumber, */
       }));
 
       const dataa = {
@@ -377,14 +374,15 @@ const Staked = () => {
       };
       updateNfts(dataa);
       setStake(tostake.concat(stake));
+      setSelect([]);
+      setSelect2([]);
+      const asd = async () => {
+        setAllUsers(await getAllUsuarios());
+      };
+      asd();
     }
     /* setStaking(true); */
-    setSelect([]);
-    setSelect2([]);
-    const asd = async () => {
-      setAllUsers(await getAllUsuarios());
-    };
-    asd();
+   
     /* router.push("/stake"); */
   };
   const addToStake = (a) => {
