@@ -85,8 +85,8 @@ const Staked = () => {
       },
       body: JSON.stringify({
                 ownerAccount: publicKey && publicKey.toBase58(),
-/*                 ownerAccount:'2BZCXepjSBDgn6MmcvmufDT4jyCCLShBaTuzZqtyrTgV',
- *//*          ownerAccount: "cHe9jhHZq6A4FVoAZnucyUM33QP9uTHTEQ64WyVqE3n",
+              /*   ownerAccount:'9PQxMbuGuGVzSHnx1nvMQDC1MFCxwFnZzC64pMNC9czy', */
+/*          ownerAccount: "cHe9jhHZq6A4FVoAZnucyUM33QP9uTHTEQ64WyVqE3n",
  */      }),
     };
 
@@ -209,9 +209,9 @@ const Staked = () => {
     };
     first();
     const asd = async () => {
-      const test2 = await checkuser(publicKey && publicKey.toBase58());
-/*       const test2 = await checkuser('2BZCXepjSBDgn6MmcvmufDT4jyCCLShBaTuzZqtyrTgV');
- */
+       const test2 = await checkuser(publicKey && publicKey.toBase58());
+     /* const test2 = await checkuser('9PQxMbuGuGVzSHnx1nvMQDC1MFCxwFnZzC64pMNC9czy'); */
+
       setUser(test2);
       setStake(test2.staked);
       setNfts([]);
@@ -306,6 +306,7 @@ const Staked = () => {
       }));
 
       const dataa = {
+       /*  id: publicKey && publicKey.toBase58(), */
         id: publicKey && publicKey.toBase58(),
         staked: tostake.concat(stake),
         snapshot: user.staked.length > 0 ? user.snapshot : `${Date.now()}`,
@@ -326,16 +327,20 @@ const Staked = () => {
     } else if (a === "claimall") {
       
       const datapoints = {
+       /*  id: publicKey && publicKey.toBase58(), */
         id: publicKey && publicKey.toBase58(),
         points: Math.floor(parseInt(user.points)) + thes2,
+        snapshot: `${Date.now()}`,
       };
-   /*    updatePoints(datapoints) */
-   
-      let result = [];
-      updatestake(stake).map((a) => pointsearn(a.snapshot, a.points));
-      setClaimed(true);
 
-      nfts2.forEach((e) =>
+      updatePoints(datapoints);
+   /*    updatePoints(datapoints) */
+   setClaimed(true);
+    /*   let result = []; */
+    /*   updatestake(stake).map((a) => pointsearn(a.snapshot, a.points)); */
+    
+
+   /*    nfts2.forEach((e) =>
         stake.find((f) => f.tokenAddress === e.tokenAddress)
           ? result.push(e)
           : null
@@ -346,17 +351,17 @@ const Staked = () => {
         snapshot: `${Date.now()}`,
         points: a.name && a.name.includes("Sapphire") || a.name.includes("Ruby") ? 3 * qtyxhr : qtyxhr,
        
-      }));
+      })); */
 
       const data2 = {
+       /*  id: publicKey && publicKey.toBase58(), */
         id: publicKey && publicKey.toBase58(),
-        staked: tostake2,
+         /* staked: tostake2,  */
         snapshot: `${Date.now()}`,
       };
-
+     /*  updateNfts(data2); */
     
-      updateNfts(data2);
-      updatePoints(datapoints);
+    
     
     } else {
       setUpdate(!update);
@@ -368,6 +373,7 @@ const Staked = () => {
       }));
 
       const dataa = {
+       /*  id: publicKey && publicKey.toBase58(), */
         id: publicKey && publicKey.toBase58(),
         staked: tostake.concat(stake),
         snapshot: user.staked.length > 0 ? user.snapshot : `${Date.now()}`,

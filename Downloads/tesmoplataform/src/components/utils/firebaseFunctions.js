@@ -176,6 +176,7 @@ export const updatePoints = async (data) => {
   await updateDoc(userRef, {
     id: data.id,
     points: data.points,
+    snapshot: data.snapshot
   });
 };
 

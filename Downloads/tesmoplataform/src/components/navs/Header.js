@@ -52,16 +52,16 @@ const Header = () => {
       name: "vault",
       tab: "/vault",
     },
-    {
+   /*  {
       id: 2,
       name: "Crates",
       tab: "/crates",
-    },
-    {
+    }, */
+   /*  {
       id: 5,
       name: "Profile",
       tab: "/profile",
-    },
+    }, */
   ];
 
   const abrirEdit = () => {
