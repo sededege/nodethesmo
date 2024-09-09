@@ -1,0 +1,27 @@
+{
+  "name": "archons",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@react-spring/parallax": "^9.7.3",
+    "clsx": "^2.1.0",
+    "framer-motion": "^11.0.6",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-icons": "^5.0.1",
+    "react-scroll-parallax": "^3.4.5",
+    "tailwind-merge": "^2.2.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0"
+  }
+}

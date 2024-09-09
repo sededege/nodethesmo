@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.old {
+  font-family: 'Old', sans-serif;
+}
+
+@font-face {
+  font-family: 'Old';
+  src: url('/OldLondon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+background-image: url('/background.png');
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+
+.overlayContainer {
+  position: relative;
+
+  background-image: url('/logo2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: overlay; /* Remove !important unless necessary */
+
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
